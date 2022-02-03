@@ -18,6 +18,57 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/server_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/server_ip"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <EditText
+        android:id="@+id/ett_ip"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:hint="@string/device_name"
+        android:paddingTop="0dp"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/server_ip"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/server_ip" />
+
+    <TextView
+        android:id="@+id/server_port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/server_port"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ett_ip" />
+
+    <EditText
+        android:id="@+id/ett_port"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:hint="@string/device_name"
+        android:paddingTop="0dp"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/server_port"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/server_port" />
 
     <TextView
         android:id="@+id/user_device_name"
@@ -29,10 +80,10 @@
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/ett_port" />
 
     <EditText
-        android:id="@+id/ett1"
+        android:id="@+id/ett_mcname"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
@@ -52,7 +103,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ett1" />
+        app:layout_constraintTop_toBottomOf="@id/ett_mcname" />
 
     <Button
         android:id="@+id/button1"

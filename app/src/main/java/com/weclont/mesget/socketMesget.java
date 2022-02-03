@@ -29,9 +29,6 @@ public class socketMesget {
     private BufferedReader inputStream;
     private String response = "";
 
-    private String ip = "8.210.199.163";
-    private String port = "9011";
-
 
     /*默认重连*/
     private boolean isReConnect = true;
@@ -40,7 +37,7 @@ public class socketMesget {
 
         if (socket == null) {
             try {
-                socket = new Socket(ip, Integer.parseInt(port));
+                socket = new Socket(MainApplication.server_ip, Integer.parseInt(MainApplication.server_port));
                 socket.setSoTimeout(Integer.MAX_VALUE);
 
                 //延时，检查连接

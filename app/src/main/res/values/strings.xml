@@ -8,4 +8,6 @@
     <string name="mesget_child_version">Mesget Child V0.6</string>
     <string name="device_name">请输入当前设备绑定的名称</string>
     <string name="location_mms">请输入定位间隔的毫秒数</string>
+    <string name="server_ip">地址：</string>
+    <string name="server_port">端口：</string>
 </resources>

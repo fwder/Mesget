@@ -22,8 +22,6 @@ public class MainService extends Service {
     public static final int NOTICE_ID = 145;
     private static final String TAG = "MainService";
     public GPSLocated located = new GPSLocated("");
-    public Context context = this;
-
 
     public void onCreate() {
         super.onCreate();
@@ -31,7 +29,9 @@ public class MainService extends Service {
         //初始化
         SharedPreferences sp = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         MainApplication.setMCName(sp.getString("MCName", ""));
-        MainApplication.setServiceContext(context);
+        MainApplication.setServiceContext(this);
+        MainApplication.setServerIP(sp.getString("IP", ""));
+        MainApplication.setServerPort(sp.getString("Port", ""));
 
         //开启定位sdk
         try {

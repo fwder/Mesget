@@ -37,9 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
         //开始运行服务
         SharedPreferences sp = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        EditText ett1 = findViewById(R.id.ett1);
+        EditText ett_mcname = findViewById(R.id.ett_mcname);
+        EditText ett_ip = findViewById(R.id.ett_ip);
+        EditText ett_port = findViewById(R.id.ett_port);
+
+        //检查配置
         if (!sp.getString("MCName", "").equals("")) {
-            ett1.setText(sp.getString("MCName", ""));
+            ett_mcname.setText(sp.getString("MCName", ""));
+            ett_ip.setText(sp.getString("IP", ""));
+            ett_port.setText(sp.getString("Port", ""));
 
             //检查是否已经申请权限
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
@@ -103,13 +109,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnonClickSaveMCNameData(View view) {
         SharedPreferences sp = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        EditText ett1 = findViewById(R.id.ett1);
-        String MCName = ett1.getText().toString();
-        if (MCName.equals("")) {
+        EditText ett_mcname = findViewById(R.id.ett_mcname);
+        EditText ett_ip = findViewById(R.id.ett_ip);
+        EditText ett_port = findViewById(R.id.ett_port);
+        if (ett_mcname.getText().toString().equals("")) {
             Toast.makeText(this, "设备名称没填写啊~", Toast.LENGTH_SHORT).show();
             return;
+        }else if(ett_ip.getText().toString().equals("")){
+            Toast.makeText(this, "服务器IP地址没填写啊~", Toast.LENGTH_SHORT).show();
+            return;
+        }else if(ett_port.getText().toString().equals("")){
+            Toast.makeText(this, "服务器端口没填写啊~", Toast.LENGTH_SHORT).show();
+            return;
         }
-        sp.edit().putString("MCName", MCName).apply();
+        sp.edit().putString("MCName", ett_mcname.getText().toString()).apply();
+        sp.edit().putString("IP", ett_ip.getText().toString()).apply();
+        sp.edit().putString("Port", ett_port.getText().toString()).apply();
         new AlertDialog.Builder(this)
                 .setTitle("提示")//设置标题
                 .setMessage("保存成功，重启以启动服务！")//提示消息
