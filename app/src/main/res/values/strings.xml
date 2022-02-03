@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Mesget</string>
+    <string name="inputtext">名称：</string>
+    <string name="save_msg">保存</string>
+    <string name="inputtext2">毫秒：</string>
+    <string name="test_socket_send">测试Socket发送</string>
+    <string name="finish_activity">隐藏</string>
+    <string name="mesget_child_version">Mesget Child V0.6</string>
+    <string name="device_name">请输入当前设备绑定的名称</string>
+    <string name="location_mms">请输入定位间隔的毫秒数</string>
+</resources>
