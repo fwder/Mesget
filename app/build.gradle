@@ -9,8 +9,8 @@ android {
         applicationId "com.weclont.mesget"
         minSdk 21
         targetSdk 31
-        versionCode 6
-        versionName "0.6"
+        versionCode 8
+        versionName "v0.7-beta.1"
         vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

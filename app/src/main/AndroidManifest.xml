@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 这行代码必须存在，否则点击不了系统设置中的按钮 -->
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/><!-- 允许静音 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/><!-- 允许安装应用 -->
     <uses-permission
         android:name="android.permission.INJECT_EVENTS"
         tools:ignore="ProtectedPermissions" /> <!-- 模拟按键权限 -->
@@ -86,6 +87,17 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="8cb0924486c8d7da497bbe99987539ed" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>
