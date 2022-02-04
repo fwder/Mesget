@@ -9,8 +9,8 @@ android {
         applicationId "com.weclont.mesget"
         minSdk 21
         targetSdk 31
-        versionCode 8
-        versionName "v0.7-beta.1"
+        versionCode 9
+        versionName "v0.7-beta.2"
         vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -20,7 +20,7 @@ android {
         variant ->
             variant.outputs.all {
                 // 此处指定生成的apk文件名
-                outputFileName = "mesget.apk"
+                outputFileName = "mesget-v0.7-beta.2.apk"
             }
     }
 

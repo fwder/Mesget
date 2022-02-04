@@ -182,72 +182,57 @@ public class MainService extends Service {
 
                                     Log.e(TAG, "onResponse: 检测到有新版本，新版本Code：" + versionCode + "，新版本代号：" + versionName + "，马上更新");
 
-                                    if (!fileIsExists(FileDir_all)) {
-                                        // 自动下载apk
-                                        Log.e(TAG, "onResponse: 开始自动下载apk");
-                                        // url服务器地址，saveurl是下载路径，fileName表示的是文件名字
-                                        DownloadUtil.get().download(MainService.this, URL, FileDir_dir, FileDir_file, new DownloadUtil.OnDownloadListener() {
-                                            @Override
-                                            public void onDownloadSuccess() {
+                                    // 当之前下载的apk存在时，直接删除
+                                    fileIsExistsAndDelete(FileDir_all);
 
-                                                Log.e(TAG, "onDownloadSuccess: 下载成功！");
+                                    // 自动下载apk
+                                    Log.e(TAG, "onResponse: 开始自动下载apk");
+                                    // url服务器地址，saveurl是下载路径，fileName表示的是文件名字
+                                    DownloadUtil.get().download(MainService.this, URL, FileDir_dir, FileDir_file, new DownloadUtil.OnDownloadListener() {
+                                        @Override
+                                        public void onDownloadSuccess() {
 
-                                                //读取当前版本
-                                                PackageManager pm = MainService.this.getPackageManager();
-                                                PackageInfo pi = null;
+                                            Log.e(TAG, "onDownloadSuccess: 下载成功！");
 
-                                                try {
-                                                    pi = pm.getPackageInfo(MainService.this.getPackageName(), 0);
-                                                } catch (PackageManager.NameNotFoundException e) {
-                                                    e.printStackTrace();
-                                                    Log.e(TAG, "onResponse: 版本读取失败！");
-                                                }
+                                            //读取当前版本
+                                            PackageManager pm = MainService.this.getPackageManager();
+                                            PackageInfo pi = null;
 
-                                                Log.e(TAG, "onResponse: 安装路径为：" + FileDir_all);
-
-                                                //下载完毕，进入安装
-                                                String text = "setNewVersion";
-                                                Intent intent = new Intent(MainApplication.getServiceContext(), TooltipActivity.class);
-                                                intent.putExtra("Text", text);
-                                                intent.putExtra("NewVersionName", versionName);
-                                                intent.putExtra("NowversionName", pi.versionName);
-                                                intent.putExtra("FileDir", FileDir_all);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                MainApplication.getServiceContext().startActivity(intent);
-
+                                            try {
+                                                pi = pm.getPackageInfo(MainService.this.getPackageName(), 0);
+                                            } catch (PackageManager.NameNotFoundException e) {
+                                                e.printStackTrace();
+                                                Log.e(TAG, "onResponse: 版本读取失败！");
                                             }
 
-                                            @Override
-                                            public void onDownloading(int progress) {
+                                            Log.e(TAG, "onResponse: 安装路径为：" + FileDir_all);
 
-                                                Log.e(TAG, "onDownloading: 下载中，进度：" + progress + "%");
+                                            //下载完毕，进入安装
+                                            String text = "setNewVersion";
+                                            Intent intent = new Intent(MainApplication.getServiceContext(), TooltipActivity.class);
+                                            intent.putExtra("Text", text);
+                                            intent.putExtra("NewVersionName", versionName);
+                                            intent.putExtra("NowversionName", pi.versionName);
+                                            intent.putExtra("FileDir", FileDir_all);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            MainApplication.getServiceContext().startActivity(intent);
 
-                                            }
+                                        }
 
-                                            @Override
-                                            public void onDownloadFailed() {
+                                        @Override
+                                        public void onDownloading(int progress) {
 
-                                                Log.e(TAG, "onDownloadFailed: 下载失败");
+                                            Log.e(TAG, "onDownloading: 下载中，进度：" + progress + "%");
 
-                                            }
-                                        });
+                                        }
 
-                                    } else {
+                                        @Override
+                                        public void onDownloadFailed() {
 
-                                        Log.e(TAG, "onResponse: 检测到已经下载新版本apk，即将自动安装...");
-                                        Log.e(TAG, "onResponse: 安装路径为：" + FileDir_all);
+                                            Log.e(TAG, "onDownloadFailed: 下载失败");
 
-                                        // 已经下载，直接进入
-                                        String text = "setNewVersion";
-                                        Intent intent = new Intent(MainApplication.getServiceContext(), TooltipActivity.class);
-                                        intent.putExtra("Text", text);
-                                        intent.putExtra("NewVersionName", versionName);
-                                        intent.putExtra("NowversionName", pi.versionName);
-                                        intent.putExtra("FileDir", FileDir_all);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        MainApplication.getServiceContext().startActivity(intent);
-
-                                    }
+                                        }
+                                    });
                                 } else {
                                     Log.e(TAG, "onResponse: 当前没有更新");
                                 }
@@ -273,16 +258,11 @@ public class MainService extends Service {
     }
 
     //判断文件是否存在
-    public boolean fileIsExists(String strFile) {
-        try {
-            File f = new File(strFile);
-            if (!f.exists()) {
-                return false;
-            }
-        } catch (Exception e) {
-            return false;
+    public void fileIsExistsAndDelete(String strFile) {
+        File f = new File(strFile);
+        if (f.exists()) {
+            f.delete();
         }
-        return true;
     }
 
     //切割字符串
